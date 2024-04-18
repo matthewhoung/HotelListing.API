@@ -3,6 +3,7 @@ using HotelListing.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelListing.API.Migrations
 {
     [DbContext(typeof(HotelListingDbContext))]
-    partial class HotelListingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240418070556_MakeCountryIdrequired")]
+    partial class MakeCountryIdrequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,20 +48,20 @@ namespace HotelListing.API.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Jamaica",
-                            ShortName = "JM"
+                            Name = "Taiwan",
+                            ShortName = "TW"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Bahamas",
-                            ShortName = "BS"
+                            Name = "United States",
+                            ShortName = "US"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Cayman Island",
-                            ShortName = "CI"
+                            Name = "Japan",
+                            ShortName = "JP"
                         });
                 });
 
@@ -94,26 +97,26 @@ namespace HotelListing.API.Migrations
                         new
                         {
                             Id = 1,
-                            Address = "Negril",
+                            Address = "Taipei",
                             CountryId = 1,
-                            Name = "Sandals Resort and Spa",
+                            Name = "Hotel Taiwan",
                             Rating = 4.5
                         },
                         new
                         {
                             Id = 2,
-                            Address = "George Town",
-                            CountryId = 3,
-                            Name = "Comfort Suites",
-                            Rating = 4.2999999999999998
+                            Address = "New York",
+                            CountryId = 2,
+                            Name = "Hotel US",
+                            Rating = 4.0
                         },
                         new
                         {
                             Id = 3,
-                            Address = "Nassua",
-                            CountryId = 2,
-                            Name = "Grand Palldium",
-                            Rating = 4.0
+                            Address = "Tokyo",
+                            CountryId = 3,
+                            Name = "Hotel Japan",
+                            Rating = 4.2999999999999998
                         });
                 });
 

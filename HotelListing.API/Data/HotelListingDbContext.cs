@@ -6,12 +6,12 @@ namespace HotelListing.API.Data
     {
         public HotelListingDbContext(DbContextOptions options) : base(options)
         {
+
         }
-        //below are the tables that will be created in the database
+
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Country> Countries { get; set; }
-        //using fluent API(override OnModelCreating) to configure the relationship between the tables
-        //seeding the database with fake data
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -19,48 +19,49 @@ namespace HotelListing.API.Data
                 new Country
                 {
                     Id = 1,
-                    Name = "Taiwan",
-                    ShortName = "TW"
-                 },
+                    Name = "Jamaica",
+                    ShortName = "JM"
+                },
                 new Country
                 {
                     Id = 2,
-                    Name = "United States",
-                    ShortName = "US"
+                    Name = "Bahamas",
+                    ShortName = "BS"
                 },
                 new Country
                 {
                     Id = 3,
-                    Name = "Japan",
-                    ShortName = "JP"
+                    Name = "Cayman Island",
+                    ShortName = "CI"
                 }
-                );
+            );
+
             modelBuilder.Entity<Hotel>().HasData(
                 new Hotel
                 {
                     Id = 1,
-                    Name = "Hotel Taiwan",
-                    Address = "Taipei",
+                    Name = "Sandals Resort and Spa",
+                    Address = "Negril",
                     CountryId = 1,
                     Rating = 4.5
                 },
                 new Hotel
                 {
                     Id = 2,
-                    Name = "Hotel US",
-                    Address = "New York",
-                    CountryId = 2,
-                    Rating = 4.0
+                    Name = "Comfort Suites",
+                    Address = "George Town",
+                    CountryId = 3,
+                    Rating = 4.3
                 },
                 new Hotel
                 {
                     Id = 3,
-                    Name = "Hotel Japan",
-                    Address = "Tokyo",
-                    CountryId = 3,
-                    Rating = 4.3
+                    Name = "Grand Palldium",
+                    Address = "Nassua",
+                    CountryId = 2,
+                    Rating = 4
                 }
-                );
+            );
         }
     }
 }
