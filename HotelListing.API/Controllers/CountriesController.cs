@@ -52,6 +52,7 @@ namespace HotelListing.API.Controllers
 
         // PUT: api/Countries/{id}
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutCountry(int id, UpdateCountryDto updateCountryDto)
         {
             if (id != updateCountryDto.Id)
@@ -101,7 +102,7 @@ namespace HotelListing.API.Controllers
 
         // DELETE: api/Countries/{id}
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Roles ="Administrator")]
         public async Task<IActionResult> DeleteCountry(int id)
         {
             var country = await _countriesRepository.GetAsync(id);
