@@ -8,7 +8,6 @@ namespace HotelListing.API.Data
     {
         public HotelListingDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         public DbSet<Hotel> Hotels { get; set; }

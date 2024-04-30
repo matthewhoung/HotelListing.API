@@ -11,10 +11,12 @@ namespace HotelListing.API.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAuthManager _authManager;
+        private readonly ILogger<AccountController> _logger;
 
-       public AccountController(IAuthManager authManager)
+       public AccountController(IAuthManager authManager, ILogger<AccountController> logger)
         {
             this._authManager = authManager;
+            this._logger = logger;
         }
 
         //POST: api/Account/register
@@ -25,16 +27,19 @@ namespace HotelListing.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> Register([FromBody] ApiUserDto apiUserDto)
         {
-            var errors = await _authManager.Register(apiUserDto);
-            if (errors.Any())
-            {
-                foreach ( var error in errors)
+            _logger.LogInformation($"Registration Attempt for {apiUserDto.Email}");
+            
+                var errors = await _authManager.Register(apiUserDto);
+
+                if (errors.Any())
                 {
-                    ModelState.AddModelError(error .Code, error.Description);
+                    foreach (var error in errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
+                    return BadRequest(ModelState);
                 }
-                return BadRequest(ModelState);
-            }
-            return Ok(apiUserDto);
+                return Ok(apiUserDto);
         }
 
         //POST: api/Account/login
@@ -45,7 +50,9 @@ namespace HotelListing.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> Login([FromBody] LoginDto loginDto)
         {
+            _logger.LogInformation($"Login Attempt form {loginDto.Email}");
             var authResponse = await _authManager.Login(loginDto);
+
             if (authResponse == null)
             {
                 return Unauthorized();
