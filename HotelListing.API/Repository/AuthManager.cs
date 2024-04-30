@@ -26,6 +26,7 @@ namespace HotelListing.API.Repository
             this._mapper = mapper;
             this._userManager = userManager;
             this._configuration = configuration;
+            this._logger = logger;
         }
         public async Task<string> CreateRefreshToken()
         {
