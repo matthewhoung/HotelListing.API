@@ -50,7 +50,7 @@ namespace HotelListing.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> Login([FromBody] LoginDto loginDto)
         {
-            _logger.LogInformation($"Login Attempt form {loginDto.Email}");
+            _logger.LogInformation($"Login Attempt from {loginDto.Email}");
             var authResponse = await _authManager.Login(loginDto);
 
             if (authResponse == null)
